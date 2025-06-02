@@ -8,12 +8,17 @@ public class EventService(EventDbContext context) : IEventService
 {
     public readonly EventDbContext _context = context;
 
+    // Returns all events from the database
     public async Task<IEnumerable<EventEntity>> GetAllAsync() =>
         await _context.Events.ToListAsync();
 
+
+    // Finds a single event by ID
     public async Task<EventEntity?> GetByIdAsync(string id) =>
         await _context.Events.FindAsync(id);
 
+
+    // Adds a new event to the database
     public async Task<EventEntity> CreateAsync(EventEntity entity)
     {
         _context.Events.Add(entity);
@@ -21,6 +26,8 @@ public class EventService(EventDbContext context) : IEventService
         return entity;
     }
 
+
+    // Deletes an event by ID
     public async Task<bool> DeleteAsync(string id)
     {
         var entity = await _context.Events.FindAsync(id);

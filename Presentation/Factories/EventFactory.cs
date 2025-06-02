@@ -3,6 +3,9 @@ using Presentation.Models;
 
 namespace Presentation.Factories;
 
+
+// Static factory class for converting between DTOs and entities
+// Keeps controller logic clean by handling transformation in one place
 public class EventFactory
 {
     public static EventEntity FromDto(CreateEventDto dto)

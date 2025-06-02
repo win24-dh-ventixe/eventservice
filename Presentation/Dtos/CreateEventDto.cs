@@ -2,6 +2,9 @@
 
 namespace Presentation.Dtos;
 
+
+// DTO used when creating a new event (data received from client)
+// Includes validation rules like required fields and allowed value ranges
 public class CreateEventDto
 {
     [Required]
