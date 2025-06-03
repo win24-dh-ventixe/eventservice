@@ -34,4 +34,14 @@ public class EventFactory
             Price = entity.Price
         };
     }
+
+    public static void UpdateEntity(EventEntity entity, UpdateEventDto dto)
+    {
+        if (dto.Title is not null) entity.Title = dto.Title;
+        if (dto.Description is not null) entity.Description = dto.Description;
+        if (dto.Start.HasValue) entity.Start = dto.Start.Value;
+        if (dto.End.HasValue) entity.End = dto.End.Value;
+        if (dto.Location is not null) entity.Location = dto.Location;
+        if (dto.Price.HasValue) entity.Price = dto.Price.Value;
+    }
 }

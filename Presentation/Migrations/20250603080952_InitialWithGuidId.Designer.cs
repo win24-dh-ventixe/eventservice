@@ -12,8 +12,8 @@ using Presentation.Data;
 namespace Presentation.Migrations
 {
     [DbContext(typeof(EventDbContext))]
-    [Migration("20250602165641_InitEvent")]
-    partial class InitEvent
+    [Migration("20250603080952_InitialWithGuidId")]
+    partial class InitialWithGuidId
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,8 +27,9 @@ namespace Presentation.Migrations
 
             modelBuilder.Entity("Presentation.Models.EventEntity", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
                         .HasMaxLength(1000)

@@ -6,7 +6,7 @@ namespace Presentation.Models;
 public class EventEntity
 {
     [Key]
-    public string Id { get; set; } = Guid.NewGuid().ToString();
+    public Guid Id { get; set; } = Guid.NewGuid();
 
     [Required]
     [MaxLength(100)]

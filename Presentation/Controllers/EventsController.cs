@@ -22,7 +22,7 @@ public class EventsController(IEventService eventService) : ControllerBase
     // GET /api/events/{id}
     // Returns a specific event by ID
     [HttpGet("{id}")]
-    public async Task<IActionResult> Get(string id)
+    public async Task<IActionResult> Get(Guid id)
     {
         var result = await _eventService.GetByIdAsync(id);
         return result is null ? NotFound() : Ok(result);
@@ -46,9 +46,20 @@ public class EventsController(IEventService eventService) : ControllerBase
     // DELETE /api/events/{id}
     // Deletes an event by ID
     [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(string id)
+    public async Task<IActionResult> Delete(Guid id)
     {
         var success = await _eventService.DeleteAsync(id);
         return success ? NoContent() : NotFound();
+    }
+
+    // PUT /api/events/{id}
+    // Updates an existing event by ID using the provided DTO
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Put(Guid id, [FromBody] UpdateEventDto dto)
+    {
+        if (!ModelState.IsValid) return BadRequest(ModelState);
+
+        var updated = await _eventService.UpdateAndReturnAsync(id, dto);
+        return updated is null ? NotFound() : Ok(updated);
     }
 }
