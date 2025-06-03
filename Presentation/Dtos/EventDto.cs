@@ -5,11 +5,11 @@
 // Represents a simplified version of the full EventEntity
 public class EventDto
 {
-    public string Id { get; set; } = string.Empty;
-    public string Title { get; set; } = string.Empty;
-    public string? Description { get; set; }
-    public DateTime Start { get; set; }
-    public DateTime? End { get; set; }
-    public string Location { get; set; } = string.Empty;
-    public decimal Price { get; set; }
+    public string Id { get; init; } = string.Empty;
+    public string Title { get; init; } = string.Empty;
+    public string? Description { get; init; }
+    public DateTime Start { get; init; }
+    public DateTime? End { get; init; }
+    public string Location { get; init; } = string.Empty;
+    public decimal Price { get; init; }
 }
