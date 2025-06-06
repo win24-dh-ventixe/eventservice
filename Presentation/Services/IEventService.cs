@@ -7,8 +7,8 @@ namespace Presentation.Services
     {
         Task<EventEntity> CreateAsync(EventEntity entity);
         Task<bool> DeleteAsync(Guid id);
-        Task<IEnumerable<EventEntity>> GetAllAsync();
+        Task<IEnumerable<EventDto>> GetAllAsync();
         Task<EventDto?> GetByIdAsync(Guid id);
-        Task<EventDto?> UpdateAndReturnAsync (Guid id, UpdateEventDto dto);
+        Task<EventDto?> UpdateAndReturnAsync(Guid id, UpdateEventDto dto);
     }
 }

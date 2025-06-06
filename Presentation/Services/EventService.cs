@@ -11,8 +11,12 @@ public class EventService(EventDbContext context) : IEventService
     public readonly EventDbContext _context = context;
 
     // Returns all events from the database
-    public async Task<IEnumerable<EventEntity>> GetAllAsync() =>
-        await _context.Events.ToListAsync();
+    public async Task<IEnumerable<EventDto>> GetAllAsync()
+    {
+        var events = await _context.Events.ToListAsync();
+        var dtoList = events.Select(EventFactory.ToDto).ToList();
+        return dtoList;
+    }
 
 
     // Finds a single event by ID
@@ -20,11 +24,11 @@ public class EventService(EventDbContext context) : IEventService
     {
         var entity = await _context.Events.FindAsync(id);
         if (entity == null) return null;
-        
+
         return EventFactory.ToDto(entity);
     }
-        
-        
+
+
 
 
     // Adds a new event to the database
@@ -41,12 +45,12 @@ public class EventService(EventDbContext context) : IEventService
     {
         var entity = await _context.Events.FindAsync(id);
         if (entity == null) return false;
-        
+
         _context.Events.Remove(entity);
         await _context.SaveChangesAsync();
         return true;
     }
-    
+
     // Updates an existing event by ID using the provided DTO
     public async Task<EventDto?> UpdateAndReturnAsync(Guid id, UpdateEventDto dto)
     {
